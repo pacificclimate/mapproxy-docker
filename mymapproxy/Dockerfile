@@ -20,8 +20,5 @@ RUN pip install waitress
 
 EXPOSE 8080
 
-RUN chmod +x /app/run.sh
-
-
 CMD [ "python3","-m","waitress", "--listen", "0.0.0.0:8080", "config:application" ]
 
