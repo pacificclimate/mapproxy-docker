@@ -7,6 +7,8 @@ services:
   demo:
   tms:
   wms:
+    # host: 0.0.0.0  # Listen on all available network interfaces
+    # port: 8080      # Listen on port 8080
     #srs sets the coordinate reference systems as which you want to make your data available. MapProxy reprojects the source data very well to these projections.
     srs: ['EPSG:4326', EPSG:3857]
     image_formats: ['image/jpeg', 'image/png']
@@ -42,12 +44,13 @@ layers:
 caches:
   #setup the cache for the open streetmap tiles. This cache is used by the layer above.
   osm_cache:
-    grids: [GLOBAL_MERCATOR, GLOBAL_GEODETIC, base-4326]
+    # grids: [GLOBAL_MERCATOR, GLOBAL_GEODETIC, base-4326]
+    grids: [base-4326]
     sources: [osm_tiles] #here you set what source data (defined below) you want to cache
     format: image/png
  
   cartoDB_cache:
-    grids: [GLOBAL_MERCATOR, GLOBAL_GEODETIC, base-4326]
+    grids: [base-4326]
     sources: [cartoDB_tile_a, cartoDB_tile_b, cartoDB_tile_c, cartoDB_tile_d]
     format: image/png
 
@@ -82,7 +85,7 @@ grids:
   osm_grid:
     #this srs and origin specify a grid that can be used elsewhere in the configuration. In this example it is used for the osm_tiles source. These settings are correct for openstreetmap.org tiles.
     #The google mercator srs is used (also called EPSG:900913), and the origin of the tiles is north-west). If you get this wrong, you might very well get an all-blue world.
-    srs: EPSG:4326
+    srs: EPSG:900913
     origin: nw
 
   base-4326:
