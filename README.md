@@ -1,15 +1,16 @@
 
 # MapProxy-Docker
 
-This project is for running a [MapProxy](https://mapproxy.org/) server in  [docker]() container. It uses [waitress](https://docs.pylonsproject.org/projects/waitress/en/stable/index.html) as pure-Pyhon WSGI server. 
+This project is for running a [MapProxy](https://mapproxy.org/) server in  [docker](https://www.docker.com/) container. It uses [waitress](https://docs.pylonsproject.org/projects/waitress/en/stable/index.html) as a pure-Pyhon WSGI server. 
 
 
 ## Deployment
 
-Build the image
+Build the image 
 
 ```bash
-  dockebuild --no-cache -t mapproxy .
+cd mymapproxy
+docker build --no-cache -t mapproxy .
 ```
 
 ```bash
