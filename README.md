@@ -26,6 +26,18 @@ navigate to http://localhost:8080/demo/
 [MIT](https://choosealicense.com/licenses/mit/)
 
 
+## Acknowledgements
+
+### Base Maps
+[cartoDB](https://cartodb-basemaps-a.global.ssl.fastly.net/#13/40.7062/-74.0045)
+
+[OSM](https://www.openstreetmap.org/)
+
+### MapProxy
+
+[MapProxy GitHub](https://github.com/mapproxy)
+
+
 ## Authors
 
 - [@QSparks](https://github.com/QSparks)
