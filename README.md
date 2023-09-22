@@ -4,7 +4,6 @@
 This project is for running a [MapProxy](https://mapproxy.org/) server in a [Docker](https://www.docker.com/) container. It uses [waitress](https://docs.pylonsproject.org/projects/waitress/en/stable/index.html) as a pure-Python WSGI server.
 The base map is the CartoDB "positron" or "light_all" style using OSM data.
 
-
 ## Deployment
 
 Build the Docker image:
@@ -12,19 +11,9 @@ Build the Docker image:
 ```bash
 cd mymapproxy
 docker build --no-cache -t mapproxy .
-
-
-## Deployment
-
-Build the image 
-
-```bash
-cd mymapproxy
-docker build --no-cache -t mapproxy .
 ```
 
-docker run --rm -it --name "mapproxy-test" -p 8080:8080 -v $(pwd)/cache_data:/app/cache_data mapproxy
-
+Run the Docker container:
 
 ```bash
 docker run --rm -it --name "mapproxy-test" -p 8080:8080 -v $(pwd)/cache_data:/app/cache_data mapproxy
@@ -40,7 +29,6 @@ Navigate to [http://localhost:8080/demo/](http://localhost:8080/demo/), and the 
 
 This service is intended for private and evaluation use only.
 The data is licensed under the [Creative Commons Attribution-ShareAlike 2.0 License](http://creativecommons.org/licenses/by-sa/2.0/).
-
 
 ## Acknowledgments
 
