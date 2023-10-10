@@ -1,0 +1,18 @@
+version: '3.2'
+services:
+  mapproxy_DEV:
+    # network_mode: host
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mapproxy
+    container_name: mapproxy_DEV
+    ports:
+      - "${PORT_NUMBER}:8080"
+    volumes:
+      - ${HOST_PATH}:/app
+
+networks:
+  default:
+    external:
+      name: pcicbr0

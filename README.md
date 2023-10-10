@@ -6,6 +6,7 @@ The base map is the CartoDB "positron" or "light_all" style using OSM data.
 
 ## Deployment
 
+### Local:
 Build the Docker image:
 
 ```bash
@@ -18,13 +19,19 @@ Run the Docker container:
 ```bash
 docker run --rm -it --name "mapproxy-test" -p 8080:8080 -v $(pwd)/cache_data:/app/cache_data mapproxy
 ```
-
 The console should display something like: `INFO:waitress:Serving on http://0.0.0.0:8080`
 
-## View Demo
+#### View Demo:
 
-Navigate to [http://localhost:8080/demo/](http://localhost:8080/demo/), and the MapProxy demo page should be viewable.
+navigate to http://localhost:8080/demo/
+ and the MapProxy demo page should be viewable. 
 
+### On our Docker servers:
+```bash
+docker-compose up --build -d
+```
+#### Docker Demo
+http://<server>.pcic.uvic.ca:<Port>/
 ## License
 
 This service is intended for private and evaluation use only.
