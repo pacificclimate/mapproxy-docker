@@ -6,9 +6,10 @@ services:
   #sets up how to make the source data available
   demo:
   tms:
+    use_grid_names: true
   wms:
     #srs sets the coordinate reference systems as which you want to make your data available. MapProxy reprojects the source data very well to these projections.
-    srs: ['EPSG:4326']
+    srs: ['EPSG:900913', 'EPSG:3857', 'EPSG:4326']
     image_formats: ['image/jpeg', 'image/png']
     md:
       # metadata used in capabilities documents
@@ -26,42 +27,39 @@ services:
 
 layers:
   #sets up which layers you want to make available using the services above. You can add many, but let's stick to osm data here.
-  - name: cartoDB
-    title: cartoDB Layer
-    sources: [proj_cache]
+  - name: OSM
+    title: OSM Tiles in 4326
+    sources: [proj_osm]
       
 caches:
-  #setup the cache for the cartoDB tiles. This cache is used by the layer above.
-  source_cache:
-    grids: [osm_grid]
-    sources: [cartoDB_tiles]
+  #setup the cache for the OSM tiles. 
+  source_osm:
+    grids: [GLOBAL_WEBMERCATOR]
+    sources: [osm_tiles]
     disable_storage: true
     format: image/png
+  
   #reproject
-  proj_cache:
+  proj_osm:
     grids: [base-4326]
     sources: [source_cache]
 
+  
 sources:
-   cartoDB_tiles:
-     type: tile
-     url: https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/%(tms_path)s.%(format)s
-     grid: osm_grid
+   osm_tiles:
+    type: tile
+    url: http://tile.openstreetmap.org/%(tms_path)s.%(format)s
+    grid: GLOBAL_WEBMERCATOR #the grid to use for the osm tiles.
+     
 
 grids:
-  osm_grid:
-    #this srs and origin specify a grid that can be used elsewhere in the configuration. In this example it is used for the osm_tiles source. These settings are correct for openstreetmap.org tiles.
-    #The google mercator srs is used (also called EPSG:900913), and the origin of the tiles is north-west). If you get this wrong, you might very well get an all-blue world.
-    srs: EPSG:900913
-    origin: nw
-    tile_size: [256, 256]
-    
   base-4326:
-    srs: EPSG:4326
-    origin: nw
-    tile_size: [256, 256]
-    # bbox: [-180, -90, 180, 90]
-
+     srs: EPSG:4326
+     origin: nw
+     tile_size: [256, 256]
+     bbox: [-180, -85.05112877980659, 180, 85.05112877980659]
+     bbox_srs: 'EPSG:4326'
+  
 globals:
   #next are some global configuration options for MapProxy. They mostly explain themselves, or can be looked-up in the MapProxy docs.
   cache:
@@ -69,9 +67,3 @@ globals:
     base_dir: './cache_data'
     # where to store lockfiles
     lock_dir: './cache_data/locks'
-
-  # image/transformation options
-  image:
-      resampling_method: bilinear
-      jpeg_quality: 90
-  
