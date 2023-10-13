@@ -29,11 +29,31 @@ navigate to http://localhost:8080/demo/
  and the MapProxy demo page should be viewable. 
 
 ### On our Docker servers:
+Start service (also pulls the image from [PCIC's Dockerhub](https://hub.docker.com/r/pcic/mapproxy-docker) if it's not already on a given server):
 ```bash
-docker-compose up --build -d
+docker-compose up -d
+```
+Stop service:
+```bash
+docker-compose down
 ```
 #### Docker Demo
-http://<server>.pcic.uvic.ca:<Port>/
+https://services.pacificclimate.org/dev/mapproxy/demo
+
+## Releasing
+
+To create a versioned release:
+
+1. Summarize the changes from the last release in `NEWS.md`
+2. Commit these changes, then tag the release:
+
+    ```bash
+    git add NEWS.md
+    git commit -m "Bump to version x.x.x"
+    git tag -a -m "x.x.x" x.x.x
+    git push --follow-tags
+    ```
+
 ## License
 
 This service is intended for private and evaluation use only.
@@ -55,4 +75,4 @@ Data extracted from OpenStreetMap after September 2012 is licensed on terms of t
 ## Authors
 
 - [@QSparks](https://github.com/QSparks)
-
+- [@eyvorchuk](https://github.com/eyvorchuk)
