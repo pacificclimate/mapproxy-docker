@@ -4,6 +4,8 @@
 This project is for running a [MapProxy](https://mapproxy.org/) server in a [Docker](https://www.docker.com/) container. It uses [waitress](https://docs.pylonsproject.org/projects/waitress/en/stable/index.html) as a pure-Python WSGI server.
 The base map is the CartoDB "positron" or "light_all" style using OSM data.
 
+
+
 ## Deployment
 
 ### Local:
@@ -37,13 +39,17 @@ http://<server>.pcic.uvic.ca:<Port>/
 This service is intended for private and evaluation use only.
 The data is licensed under the [Creative Commons Attribution-ShareAlike 2.0 License](http://creativecommons.org/licenses/by-sa/2.0/).
 
-## Acknowledgments
+Data extracted from OpenStreetMap after September 2012 is licensed on terms of the [Open Database License, "ODbL" 1.0](http://www.opendatacommons.org/licenses/odbl/), previously it was licensed CC-BY-SA 2.0.
 
-### Base Maps
-- [CartoDB](https://cartodb-basemaps-a.global.ssl.fastly.net/#13/40.7062/-74.0045)
+## Acknowledgements
+
+ ### Base Maps
+
+ [OSM](https://www.openstreetmap.org/)
 
 ### MapProxy
-- [MapProxy GitHub](https://github.com/mapproxy)
+
+[MapProxy GitHub](https://github.com/mapproxy)
 
 
 ## Authors

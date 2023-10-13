@@ -27,38 +27,51 @@ services:
 
 layers:
   #sets up which layers you want to make available using the services above. You can add many, but let's stick to osm data here.
-  - name: OSM
-    title: OSM Tiles in 4326
-    sources: [proj_osm]
+  - name: osm
+    title: OSM Layer
+    sources: [proj_osm_world_mask3]
       
 caches:
-  #setup the cache for the OSM tiles. 
+  #setup the cache for the cartoDB tiles. This cache is used by the layer above.
   source_osm:
-    grids: [GLOBAL_WEBMERCATOR]
+    grids: [osm_grid]
     sources: [osm_tiles]
     disable_storage: true
     format: image/png
   
   #reproject
-  proj_osm:
+  proj_osm_world_mask3:
     grids: [base-4326]
-    sources: [source_cache]
+    sources: [source_osm]
+    image:
+        transparent: true
 
   
 sources:
    osm_tiles:
-    type: tile
-    url: http://tile.openstreetmap.org/%(tms_path)s.%(format)s
-    grid: GLOBAL_WEBMERCATOR #the grid to use for the osm tiles.
-     
+     type: tile
+     url: http://tile.openstreetmap.org/%(tms_path)s.%(format)s
+     grid: osm_grid #the grid to use for the osm tiles. This is really important. It is specified below.
+     transparent: true
+     coverage:
+      #bbox: [-180, -85.05112877980659, 180, 85.05112877980659]
+      #bbox: [-180,-90,180,90]
+      datasource: World_Mask_900913.geojson
+      srs: EPSG:900913
+      clip: true     
 
 grids:
+  osm_grid:
+    srs: EPSG:900913
+    origin: nw
+    tile_size: [256, 256]
   base-4326:
-     srs: EPSG:4326
-     origin: nw
-     tile_size: [256, 256]
-     bbox: [-180, -85.05112877980659, 180, 85.05112877980659]
-     bbox_srs: 'EPSG:4326'
+    srs: EPSG:4326
+    origin: nw
+    tile_size: [256, 256]
+    #bbox: [-180, -85.05112877980659, 180, 85.05112877980659]
+    bbox: [-180,-90,180,90]
+    #bbox_srs: 'EPSG:4326'
   
 globals:
   #next are some global configuration options for MapProxy. They mostly explain themselves, or can be looked-up in the MapProxy docs.
@@ -67,3 +80,12 @@ globals:
     base_dir: './cache_data'
     # where to store lockfiles
     lock_dir: './cache_data/locks'
+  image:
+       paletted: false
+       formats:
+          image/jpg:
+            encoding_options:
+               jpeg_quality: 80
+          image/png:
+             mode: RGBA
+             transparent: true

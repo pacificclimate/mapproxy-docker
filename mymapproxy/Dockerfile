@@ -16,7 +16,6 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip install --upgrade pip \
     Pillow \
-    Shapely \
     PyYAML \
     MapProxy \
     uwsgi \
@@ -25,5 +24,7 @@ RUN pip install --upgrade pip \
     pyproj \
     waitress
 
+RUN pip install "shapely==1.7.0"
+#EXPOSE 8080
 CMD [ "python3","-m","waitress", "--listen", "0.0.0.0:8080", "config:application" ]
 
