@@ -2,7 +2,7 @@
 # MapProxy-Docker
 
 This project is for running a [MapProxy](https://mapproxy.org/) server in a [Docker](https://www.docker.com/) container. It uses [waitress](https://docs.pylonsproject.org/projects/waitress/en/stable/index.html) as a pure-Python WSGI server.
-The base map is the CartoDB "positron" or "light_all" style using OSM data.
+The base map uses OSM map tiles rendered in the OSM "Standard Style".
 
 
 
