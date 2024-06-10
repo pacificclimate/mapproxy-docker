@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  mapproxy_DEV:
+    # network_mode: host
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    image: mapproxy
+    container_name: mapproxy_DEV
+    ports:
+      - "${PORT_NUMBER}:8080"
+    volumes:
+      - ./mapproxy.yaml:/app/mapproxy.yaml:ro
+      - ./World_Mask_900913.geojson:/app/World_Mask_900913.geojson:ro
+      - ./cache_data:/app/cache_data
+
