@@ -2,15 +2,11 @@ version: '3.8'
 services:
   mapproxy_DEV:
     # network_mode: host
-    build:
-      context: ../
-      dockerfile: ./docker/Dockerfile
-    image: mapproxy
+    image: ghcr.io/mapproxy/mapproxy/mapproxy:6.0.1-nginx
     container_name: mapproxy_DEV
     ports:
-      - "${PORT_NUMBER}:8080"
+      - "${PORT_NUMBER}:80"
     volumes:
-      - ./mapproxy.yaml:/app/mapproxy.yaml:ro
-      - ./World_Mask_900913.geojson:/app/World_Mask_900913.geojson:ro
-      - ./cache_data:/app/cache_data
-
+      - ./mapproxy.yaml:/mapproxy/config/mapproxy.yaml:ro
+      - ./World_Mask_900913.geojson:/mapproxy/config/World_Mask_900913.geojson:ro
+      - ./cache_data:/mapproxy/config/cache_data
